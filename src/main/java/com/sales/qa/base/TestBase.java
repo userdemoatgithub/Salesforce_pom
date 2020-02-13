@@ -9,14 +9,19 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.sales.qa.util.TestUtil;
+import com.sales.qa.util.WebEventListener;
 
 
 public class TestBase {
 	
 	public static WebDriver driver;
 	public static Properties prop;
+	public static 	EventFiringWebDriver e_driver;
+	public static WebEventListener eventListener;
+	
 	
 	
 	public TestBase(){
@@ -26,41 +31,34 @@ public class TestBase {
 				FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+ "/src/main/java/com/sales/qa/config/config.properties");
 				prop.load(ip);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 				
 	}
 	
 	public static void initialization(){
-//		String browserName = prop.getProperty("browser");
-//		
-//		if (browserName.equals("chrome")){
-//			System.setProperty("webdriver.chrome.driver", "/Users/trups/Downloads/chromedriver");
-//			driver = new ChromeDriver();
-//		}
-//		else if (browserName.equals("ff")){
-//			System.setProperty("webdriver.gecko.driver", "/Users/trups/Documents/workspace/JavaStudy19/Salesforce_POM/drivers/geckodriver");
-//			driver = new FirefoxDriver();
-//		}
-//		
-//		
-//		driver.manage().window().maximize();
-//		driver.get(prop.getProperty("url"));
-		
-		
-		
-		
-		
-		System.setProperty("webdriver.chrome.driver", "/Users/trups/Downloads/chromedriver");
-     	driver = new ChromeDriver();
+	
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.home")+"/Downloads/chromedriver");
+		driver = new ChromeDriver();
+     	
+//		System.setProperty("webdriver.gecko.driver", System.getProperty("user.home")+"/Downloads/geckodriver");
+// 		driver = new FirefoxDriver();
+ 		
+ 		
+     	e_driver = new EventFiringWebDriver(driver);
+     	
+     	eventListener = new WebEventListener();
+     	
+     	e_driver.register(eventListener);
+     	
+     	driver = e_driver;
+     	
 		
 		driver.manage().window().maximize();
 		
-		
+		//driver.get(prop.getProperty("url"));
 		driver.get("https://login.salesforce.com/");
 		
 		

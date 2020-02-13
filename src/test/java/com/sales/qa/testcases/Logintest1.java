@@ -17,7 +17,7 @@ public class Logintest1 {
          
          WebElement pw = driver.findElement(By.id("password"));
          
-        pw.sendKeys("i*kC8VprzPLCxGYrfiiB");
+        pw.sendKeys("xyz");
          
          WebElement LoginBtn = driver.findElement(By.id("Login"));
          

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Salesforce_POM Automation Test Suite]">
+  <listeners>
+    <listener class-name="com.sales.qa.reports.ExtentReporterNG"/>
+  </listeners>
+  <test name="Salesforce app test cases(failed)">
+    <classes>
+      <class name="com.sales.qa.testcases.LoginPageTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="ValidateLoginNuser"/>
+        </methods>
+      </class> <!-- com.sales.qa.testcases.LoginPageTest -->
+    </classes>
+  </test> <!-- Salesforce app test cases(failed) -->
+</suite> <!-- Failed suite [Salesforce_POM Automation Test Suite] -->
